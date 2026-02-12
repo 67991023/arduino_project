@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Real-time Sensor Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Socket.IO Client -->
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔌 Arduino Real-time Sensor Monitor</h1>
+            <div class="status">
+                <span id="connectionStatus" class="status-indicator">●</span>
+                <span id="connectionText">Connecting...</span>
+            </div>
+        </header>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Touch Sensor</h3>
+                <div class="stat-value" id="currentToucher">-</div>
+                <div class="stat-label">Current State</div>
+            </div>
+            <div class="stat-card">
+                <h3>Voltage</h3>
+                <div class="stat-value" id="currentVoltage">-</div>
+                <div class="stat-label">Volts (V)</div>
+            </div>
+            <div class="stat-card">
+                <h3>Data Points</h3>
+                <div class="stat-value" id="dataCount">0</div>
+                <div class="stat-label">Received</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="clearBtn" class="btn">🗑️ Clear Data</button>
+            <button id="pauseBtn" class="btn">⏸️ Pause</button>
+            <button id="exportBtn" class="btn">💾 Export CSV</button>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-wrapper">
+                <h2>📊 Touch Sensor (Real-time)</h2>
+                <canvas id="toucherChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <h2>⚡ Voltage (Real-time)</h2>
+                <canvas id="voltageChart"></canvas>
+            </div>
+        </div>
+
+        <div class="data-table-container">
+            <h2>📋 Recent Data Log</h2>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Touch</th>
+                        <th>Voltage (V)</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
